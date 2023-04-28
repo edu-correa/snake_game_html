@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body onkeypress="move()">
+    <div id="tela" style="width: 500px; height: 500px; background-color: black; display: flex; justify-content: space-around; flex-direction: column;">
+        <div id="tab1" style="display: flex; justify-content: space-around; height: 100px; width: 500px;">
+            <div id="1x1" style="width: 100px; height: 100px; border: 1px solid white;"></div>
+            <div id="1x2" style="width: 100px; height: 100px; border: 1px solid white;"></div>
+            <div id="1x3" style="width: 100px; height: 100px; border: 1px solid white;"></div>
+            <div id="1x4" style="width: 100px; height: 100px; border: 1px solid white;"></div>
+            <div id="1x5" style="width: 100px; height: 100px; border: 1px solid white;"></div>
+        </div>
+        <div id="tab2" style="display: flex; justify-content: space-around; height: 100px; width: 500px;">
+            <div id="2x1" style="width: 100px; height: 100px; border: 1px solid white;"></div>
+            <div id="2x2" style="width: 100px; height: 100px; border: 1px solid white;"></div>
+            <div id="2x3" style="width: 100px; height: 100px; border: 1px solid white; background-color: white;"></div>
+            <div id="2x4" style="width: 100px; height: 100px; border: 1px solid white;"></div>
+            <div id="2x5" style="width: 100px; height: 100px; border: 1px solid white;"></div>
+        </div>
+        <div id="tab3" style="display: flex; justify-content: space-around; height: 100px; width: 500px;">
+            <div id="3x1"style="width: 100px; height: 100px; border: 1px solid white;"></div>
+            <div id="3x2"style="width: 100px; height: 100px; border: 1px solid white;"></div>
+            <div id="3x3"style="width: 100px; height: 100px; border: 1px solid white;"></div>
+            <div id="3x4"style="width: 100px; height: 100px; border: 1px solid white;"></div>
+            <div id="3x5"style="width: 100px; height: 100px; border: 1px solid white;"></div>
+        </div>
+        <div id="tab4" style="display: flex; justify-content: space-around; height: 100px; width: 500px;">
+            <div id="4x1"style="width: 100px; height: 100px; border: 1px solid white;"></div>
+            <div id="4x2"style="width: 100px; height: 100px; border: 1px solid white;"></div>
+            <div id="4x3"style="width: 100px; height: 100px; border: 1px solid white;"></div>
+            <div id="4x4"style="width: 100px; height: 100px; border: 1px solid white;"></div>
+            <div id="4x5"style="width: 100px; height: 100px; border: 1px solid white;"></div>
+        </div>
+       <div id="tab5" style="display: flex; justify-content: space-around; height: 100px; width: 500px;">
+            <div id="5x1"style="width: 100px; height: 100px; border: 1px solid white;"></div>
+            <div id="5x2"style="width: 100px; height: 100px; border: 1px solid white;"></div>
+            <div id="5x3"style="width: 100px; height: 100px; border: 1px solid white;"></div>
+            <div id="5x4"style="width: 100px; height: 100px; border: 1px solid white;"></div>
+            <div id="5x5"style="width: 100px; height: 100px; border: 1px solid white;"></div>
+       </div>        
+    </div>
+    
+</body>
+</html>
+<script>
+    const tela = document.getElementById("tela")
+    initialPosition = "2x3";
+    posicaoAnterior = "2x3";
+    direcao = "baixo"
+
+    tela.addEventListener("keypress", move);
+    function move(){
+        var pressed = event.keyCode;
+        console.log(pressed)
+        // Vai para a direita
+        if(event.keyCode== 100){
+            posicaoAnterior = initialPosition
+            var posicao = initialPosition.split('x')
+            if((Number(posicao[1]) + 1) < 6){
+                initialPosition = `${posicao[0]}x${Number(posicao[1]) + 1}` 
+                //alert(initialPosition)
+                direcao = "direita"
+            }
+            else{
+                alert("morreu")
+                initialPosition = "2x3";
+            }
+            getPosition(initialPosition, posicaoAnterior)
+        }
+
+        // Vai para baixo
+        if(event.keyCode== 115){
+            posicaoAnterior = initialPosition
+            var posicao = initialPosition.split('x')
+            if((Number(posicao[0]) + 1) < 6){
+                initialPosition = `${Number(posicao[0]) + 1}x${posicao[1]}` 
+                //alert(initialPosition)
+                direcao = "baixo"
+            }
+            else{
+                alert("morreu")
+                initialPosition = "2x3";
+            }
+            getPosition(initialPosition, posicaoAnterior)
+        }
+
+        // Vai para a esquerda
+        if(event.keyCode== 97){
+            posicaoAnterior = initialPosition
+            var posicao = initialPosition.split('x')
+            if((Number(posicao[1]) - 1) > 0){
+                initialPosition = `${posicao[0]}x${Number(posicao[1]) - 1}`
+                //alert(initialPosition)
+                direcao = "esquerda"
+            }
+            else{
+                alert("morreu")
+                initialPosition = "2x3";
+            }
+            getPosition(initialPosition, posicaoAnterior)
+        }
+
+        // Vai para a cima
+        if(event.keyCode== 119){
+            posicaoAnterior = initialPosition
+            var posicao = initialPosition.split('x')
+            if((Number(posicao[0]) - 1) > 0){
+                initialPosition = `${Number(posicao[0]) - 1}x${posicao[1]}`
+                //alert(initialPosition)
+            }
+            else{
+                alert("morreu")
+                initialPosition = "2x3";
+            }
+            getPosition(initialPosition, posicaoAnterior)
+        }
+    }
+    function getPosition(posicaoAtual, posicaoAntiga){
+        document.getElementById(posicaoAntiga).style = "width: 100px; height: 100px; border: 1px solid white;"
+        document.getElementById(posicaoAtual).style = "width: 100px; height: 100px; border: 1px solid white; background-color: white;"
+    } 
+    
+</script>
